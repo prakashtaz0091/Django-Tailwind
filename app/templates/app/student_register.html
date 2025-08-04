@@ -7,10 +7,10 @@
 <main class="flex-grow p-6 overflow-auto">
     <h1 class="text-3xl font-bold mb-6">Student Register</h1>
 
-    <form class="w-1/2" action="" method="post">
+    <form class="w-1/2 flex flex-col gap-4" action="" method="post">
         {% csrf_token %}
-        {{ form }}
 
+        {% include 'app/components/basic-form.html' with form=new_form %}
 
         <button class="btn btn-primary">Submit</button>
     </form>

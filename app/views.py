@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
-from .forms import StudentRegisterForm
+from .forms import StudentRegisterForm, StudentForm
 
 
 def student_register(request):
     if request.method == "POST":
         print("post data", request.POST)
-        form = StudentRegisterForm(request.POST)
+        form = StudentForm(request.POST)
 
         if not form.is_valid():
             print("invalid------------------------", form.errors)
@@ -14,15 +14,38 @@ def student_register(request):
 
         print("form is fine")
         # save data in db
-        # form.save()
+        form.save()
 
         return redirect("student_register")
 
-    form = StudentRegisterForm()
+    form = StudentForm()
 
-    context = {"form": form}
+    context = {"new_form": form}
 
     return render(request, "app/student_register.html", context)
+
+
+# def student_register(request):
+#     if request.method == "POST":
+#         print("post data", request.POST)
+#         form = StudentRegisterForm(request.POST)
+
+#         if not form.is_valid():
+#             print("invalid------------------------", form.errors)
+#             context = {"form": form}
+#             return render(request, "app/student_register.html", context)
+
+#         print("form is fine")
+#         # save data in db
+#         # form.save()
+
+#         return redirect("student_register")
+
+#     form = StudentRegisterForm()
+
+#     context = {"form": form}
+
+#     return render(request, "app/student_register.html", context)
 
 
 # def student_register(request):
